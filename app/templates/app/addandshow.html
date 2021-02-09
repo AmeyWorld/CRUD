@@ -1,0 +1,69 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-info">Add New Student</h4>
+        <form action="" method="POST">
+        {% csrf_token %}
+            {{form.as_p}}
+
+            <input type="submit" class="btn btn-success" value="Add">
+        </form>
+        {% if messages %}
+            {% for msg in messages %}
+                {% if msg.tags %}
+                    {{msg.tags}}
+                {% endif %}
+                {{msg}}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="col-sm-8">
+        <h4 class="text-center alert alert-info">Students Informations</h4>
+        {%if stu%}
+            <table class="table table-bordered" id=t2>
+              <thead class="table-success">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Stud</th>
+                  <th scope="col">Student Name </th>
+                  <th scope="col">Student Password</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+                {% for d in stu %}
+                <tbody>
+                <tr>
+                    <td><b>{{d.id}}</b></td>
+                    <td><b>{{d.name}}</b></td>
+                    <td><b>{{d.email}}</b></td>
+                    <td><b>{{d.password}}</b></td>
+                    <td>
+                        <form action="{% url 'updaterecord' d.id %}" method="GET" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-warning" value="Edit">
+                        </form>
+
+                        <form action="{% url 'deletedata' d.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                    </td>
+
+                </tr>
+                </tbody>
+                {% endfor %}
+             </table>
+        {% else %}
+        <h4 class="text-center alert alert-info">No Data </h4>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock content %}
+
+
