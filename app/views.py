@@ -42,4 +42,4 @@ def Update_Record(request, id):
             fm = student_reg(instance=stud)
     return render(request, 'app/update.html',{'form':fm})
 
-
+#  def
