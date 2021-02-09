@@ -41,5 +41,3 @@ def Update_Record(request, id):
             print('----2------', stud)
             fm = student_reg(instance=stud)
     return render(request, 'app/update.html',{'form':fm})
-
-#  def
